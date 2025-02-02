@@ -30,8 +30,8 @@ Este projeto é destinado para fins educativos e de testes em ambientes controla
 Clone este repositório para o seu ambiente local ou servidor.
 
 ```bash
-git clone https://github.com/SeuUsuario/CodeStresser.git
-cd CodeStresser
+git clone https://github.com/LucasDesignerF/Code-Stresser.git
+cd Code-Stresser
 ```
 
 ### Passo 2: Instale as Dependências
@@ -47,7 +47,7 @@ pip install -r requirements.txt
 Inicie o servidor Flask para rodar a interface web.
 
 ```bash
-python app.py
+python stresser.py
 ```
 
 O servidor estará disponível em `http://127.0.0.1:5000` ou no IP configurado em seu ambiente.
