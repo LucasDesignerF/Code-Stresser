@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Stresser - Attack Home</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for Icons (optional) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #1c1c1c;
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #00b894;
+        }
+
+        .form-group small {
+            color: #ccc;
+        }
+
+        .footer-text {
+            font-size: 1rem;
+            color: #888;
+        }
+
+        .btn-custom {
+            background-color: #00b894;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #00a085;
+        }
+
+        .response {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #121212;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dashboard de Ataque</h1>
+        <form id="attackForm">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label for="target_ip" class="form-label">Endereço IP de Destino</label>
+                    <input type="text" class="form-control" id="target_ip" placeholder="Digite o IP de destino" required>
+                    <small>Exemplo: 192.168.0.1</small>
+                </div>
+                <div class="col-md-6">
+                    <label for="port" class="form-label">Porta</label>
+                    <input type="number" class="form-control" id="port" placeholder="Digite a porta" value="80" required min="1" max="65535">
+                    <small>Exemplo: 80 (padrão HTTP)</small>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label for="attack_type" class="form-label">Tipo de Ataque</label>
+                    <select class="form-select" id="attack_type" required>
+                        <option value="http_flood">HTTP Flood</option>
+                        <option value="syn_flood">SYN Flood</option>
+                        <option value="udp_flood">UDP Flood</option>
+                        <option value="slowloris">Slowloris</option>
+                    </select>
+                    <small>Escolha o tipo de ataque que deseja realizar.</small>
+                </div>
+                <div class="col-md-6">
+                    <label for="threads" class="form-label">Número de Threads</label>
+                    <input type="number" class="form-control" id="threads" placeholder="Número de threads" value="10" required min="1" max="1000">
+                    <small>Escolha entre 1 e 1000 threads para o ataque.</small>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label for="duration" class="form-label">Duração (segundos)</label>
+                    <input type="number" class="form-control" id="duration" placeholder="Duração do ataque" value="30" required min="1" max="3600">
+                    <small>Duração do ataque em segundos (1 a 3600).</small>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-custom w-100" onclick="startAttack()">Iniciar Ataque</button>
+        </form>
+
+        <div class="message mt-4" id="statusMessage"></div>
+        <div class="response mt-4" id="responseMessage"></div>
+    </div>
+
+    <footer class="text-center">
+        <p class="footer-text">&copy; Code Projects by Rede Gamer - Code Stresser -  Since 2025</p>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        function startAttack() {
+            const target_ip = document.getElementById('target_ip').value;
+            const port = document.getElementById('port').value;
+            const attack_type = document.getElementById('attack_type').value;
+            const threads = document.getElementById('threads').value;
+            const duration = document.getElementById('duration').value;
+
+            const data = {
+                target_ip: target_ip,
+                port: port,
+                attack_type: attack_type,
+                threads: threads,
+                duration: duration
+            };
+
+            fetch('/start_attack', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('statusMessage').innerText = "Ataque iniciado!";
+                document.getElementById('responseMessage').innerText = data.message;
+            })
+            .catch(error => {
+                document.getElementById('statusMessage').innerText = "Erro ao iniciar o ataque.";
+                console.error(error);
+            });
+        }
+    </script>
+</body>
+</html>
