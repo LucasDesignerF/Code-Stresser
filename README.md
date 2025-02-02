@@ -1,6 +1,3 @@
-Claro! Aqui está um modelo de README para o seu projeto que você pode colocar no GitHub:
-
-```markdown
 # Code Stresser - Teste de Ataque de Rede
 
 O **Code Stresser** é uma ferramenta web projetada para testar a proteção de servidores contra ataques DDoS (Distributed Denial of Service). Ela permite simular diferentes tipos de ataques, como HTTP Flood, SYN Flood, UDP Flood e Slowloris, para verificar a resistência de sistemas de rede e a eficácia de defesas Anti-DDoS.
@@ -84,7 +81,3 @@ Este projeto foi desenvolvido para fins educacionais e de testes em um ambiente 
 Este projeto está licenciado sob a [MIT License](LICENSE).
 ```
 
-### Explicação:
-- O README fornece uma visão geral sobre o **Code Stresser** e explica como utilizá-lo.
-- Ele inclui instruções para clonar o repositório, instalar dependências, rodar o servidor Flask e acessar a interface.
-- Há também uma seção sobre contribuição e um aviso legal importante sobre o uso da ferramenta, para garantir que seja utilizada de forma ética e legal.
